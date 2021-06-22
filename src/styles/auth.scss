@@ -4,7 +4,7 @@
     height: 100vh;
 
     aside {
-        flex: 7;
+        flex: 6;
 
         background-color: #A016B4;
         color: #FFF;
@@ -16,7 +16,8 @@
         padding: 120px 80px;
 
         img {
-            max-width: 560px;
+            max-width: 760px;
+            margin-bottom: 10px;
         }
 
         strong {
@@ -30,11 +31,12 @@
             line-height: 32px;
             margin-top: 16px;
             color: #f8f8f8;
+            padding-bottom: 20px;
         }
     }
 
     main {
-        flex: 8;
+        flex: 9;
 
         padding: 0 32px;
 
