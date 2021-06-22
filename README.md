@@ -1,11 +1,15 @@
 
-# LetMeQuestion
+<p align="center">
+ <img alt="letmeask" title="Letmeask" src="https://github.com/bllackdev/letmequestion/blob/main/src/assets/img/logo.svg" />
+</p>
+
+# LetMeQuestion 
 
 Application to learn and share knowledge with others.
 
 ## Tech Stack
 
-**Client:** React
+**Client:** React, Typescript
 
 **Server:** Firebase
 
@@ -41,4 +45,6 @@ Start the server
 
 - [@bllackdev](https://github.com/bllackdev)
 
-  
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
