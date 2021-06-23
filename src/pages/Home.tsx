@@ -1,3 +1,4 @@
+import { useState, FormEvent } from "react";
 import { useHistory } from "react-router-dom";
 
 import illustrationImg from "../assets/img/illustration.svg";
@@ -8,8 +9,6 @@ import "../styles/auth.scss";
 
 import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
-import { FormEvent } from "react";
-import { useState } from "react";
 import { database } from "../services/firebase";
 
 export function Home() {
