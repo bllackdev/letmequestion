@@ -47,8 +47,15 @@ export function Room() {
 
     useEffect(() => {
         const roomRef = database.ref(`rooms/${roomId}`);
-
-        roomRef.once("value", room => {
+        /**
+         * TODO
+         * line 58 -> alterada de 'once' para 'on',
+         * para ficar ouvindo qualquer alteração.
+         * Para ficar mais performatico:
+         * Verificar o event Child Added na
+         * documentação do Firebase.
+         */
+        roomRef.on("value", room => {
             const databaseRoom = room.val();
             const firebaseQuestions: FirebaseQuestions = databaseRoom.questions  ?? {};
 
