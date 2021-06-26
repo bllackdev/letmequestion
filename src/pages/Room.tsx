@@ -6,31 +6,13 @@ import logoImg from "../assets/img/logo.svg";
 
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
+import { Question } from "../components/Question";
 import { useAuth } from "../hooks/useAuth";
 import { database } from "../services/firebase";
 
 import "../styles/room.scss";
-
-type FirebaseQuestions = Record<string, {
-    author: {
-        name: string;
-        avatar: string;
-    }
-    content: string;
-    isAnswered: boolean;
-    isHighlighted: boolean;
-}>;
-
-type Question = {
-    id: string;
-    author: {
-        name: string;
-        avatar: string;
-    }
-    content: string;
-    isAnswered: boolean;
-    isHighlighted: boolean;
-}
+import "../styles/question.scss";
+import { useRoom } from "../hooks/useRoom";
 
 type RoomParams = {
     id: string;
@@ -40,39 +22,8 @@ export function Room() {
     const { user } = useAuth();
     const params = useParams<RoomParams>();
     const roomId = params.id;
-
+    const { questions, title } = useRoom(roomId);
     const [newQuestion, setNewQuestion] = useState("");
-    const [questions, setQuestions] = useState<Question[]>([]);
-    const [title, setTitle] = useState("");
-
-    useEffect(() => {
-        const roomRef = database.ref(`rooms/${roomId}`);
-        /**
-         * TODO
-         * line 58 -> alterada de 'once' para 'on',
-         * para ficar ouvindo qualquer alteração.
-         * Para ficar mais performatico:
-         * Verificar o event Child Added na
-         * documentação do Firebase.
-         */
-        roomRef.on("value", room => {
-            const databaseRoom = room.val();
-            const firebaseQuestions: FirebaseQuestions = databaseRoom.questions  ?? {};
-
-            const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-                return {
-                    id: key,
-                    content: value.content,
-                    author: value.author,
-                    isHighlighted: value.isHighlighted,
-                    isAnswered: value.isAnswered,
-                }
-            })
-
-            setTitle(databaseRoom.title);
-            setQuestions(parsedQuestions);
-        })
-    }, [roomId]);
 
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault();
@@ -134,6 +85,17 @@ export function Room() {
                         <Button type="submit" disabled={!user}>Enviar pergunta</Button>
                     </div>
                 </form>
+                <div className="question-list">
+                    {questions.map( questions => {
+                        return (
+                            <Question
+                                key= {questions.id}
+                                content = {questions.content}
+                                author = {questions.author}
+                            />
+                        );
+                    })}
+                </div>
             </main>
         </div>
     );
