@@ -47,7 +47,7 @@ export function useRoom(roomId: string) {
          * Verificar o event Child Added na
          * documentação do Firebase.
          */
-        roomRef.once("value", room => {
+        roomRef.on("value", room => {
             const databaseRoom = room.val();
             const firebaseQuestions: FirebaseQuestions = databaseRoom.questions  ?? {};
 

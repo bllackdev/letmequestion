@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import logoImg from "../assets/img/logo.svg";
 import deleteImg from "../assets/img/delete.svg";
@@ -8,7 +8,6 @@ import answerImg from "../assets/img/answer.svg";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import { Question } from "../components/Question";
-import { useAuth } from "../hooks/useAuth";
 import { database } from "../services/firebase";
 
 import "../styles/room.scss";
@@ -55,7 +54,9 @@ export function AdminRoom() {
         <div id="page-room">
             <header>
                 <div className="content">
-                    <img src={logoImg} alt="Letmequestion" />
+                    <Link to="/">
+                        <img src={logoImg} alt="Letmequestion" />
+                    </Link>
                     <div>
                         <RoomCode code={roomId}/>
                         <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
